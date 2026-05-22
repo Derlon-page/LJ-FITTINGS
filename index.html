@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LJ FITTINGS — Reboques & Semi-Reboques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* === ORIGINAL COLOURS PRESERVED === */
+  --navy:#1a2a4a;
+  --navy-deep:#0f1e3a;
+  --navy-mid:#243560;
+  --blue:#2d4a8a;
+  --gold:#f0a500;
+  --gold-light:#ffbe30;
+  --gold-dim:rgba(240,165,0,.12);
+  --gold-border:rgba(240,165,0,.3);
+  --white:#ffffff;
+  --off-white:#f8f7f4;
+  --light:#f2f1ee;
+  --text:#1a1a1a;
+  --text-mid:#3a3a3a;
+  --muted:#6b6b6b;
+  --muted-light:#9a9a9a;
+  --border:#e2e0db;
+  --border-dark:#ccc9c0;
+  --wa:#25d366;
+  --font-h:'Montserrat',sans-serif;
+  --font-b:'Lato',sans-serif;
+  --r:4px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--light)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 5%;
+  transition:all .4s;
+}
+nav.scrolled{
+  background:rgba(15,30,58,.96);
+  backdrop-filter:blur(18px);
+  padding:.9rem 5%;
+  border-bottom:1px solid rgba(240,165,0,.15);
+}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo img{height:44px;width:auto;object-fit:contain}
+.nav-logo-text{font-family:var(--font-h);font-size:1.35rem;font-weight:800;letter-spacing:.06em;color:#fff}
+.nav-logo-text em{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,.75);font-family:var(--font-h);
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+  transition:color .2s;position:relative;padding-bottom:3px;
+}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--gold);color:#fff;font-family:var(--font-h);
+  padding:.55rem 1.3rem;border-radius:var(--r);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  transition:all .2s;border:2px solid var(--gold);
+}
+.nav-cta:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 22px rgba(240,165,0,.35)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:201}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:.35s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{
+  display:none;position:fixed;inset:0;background:var(--navy-deep);z-index:199;
+  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--font-h);font-size:2.2rem;font-weight:800;letter-spacing:.08em;color:rgba(255,255,255,.8);transition:color .2s;text-transform:uppercase}
+.mob-menu a:hover{color:var(--gold)}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:9rem 5% 0;
+
+  /* IMAGEM + CAMADA AZUL ESCURA TRANSPARENTE */
+  background:
+    linear-gradient(
+      rgba(10,20,50,0.75),
+      rgba(10,20,50,0.75)
+    ),
+    url('images/banner.png');
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.hero-pattern{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,165,0,.12) 0%,transparent 70%);
+  top:-100px;right:-100px;pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.05fr 1fr;gap:4rem;align-items:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;
+  background:rgba(240,165,0,.12);border:1px solid var(--gold-border);
+  padding:.38rem 1rem;border-radius:20px;
+  font-family:var(--font-h);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+}
+.hero-badge-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{
+  font-family:var(--font-h);
+  font-size:clamp(3.2rem,7vw,6.5rem);
+  font-weight:900;line-height:.95;letter-spacing:-.01em;
+  color:#fff;margin-bottom:1.5rem;
+}
+.hero h1 span{color:var(--gold);display:block}
+.hero-sub{
+  font-size:1.05rem;color:rgba(255,255,255,.65);
+  max-width:440px;margin-bottom:2.5rem;line-height:1.75;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--gold);color:#fff;font-family:var(--font-h);
+  padding:.88rem 2rem;border-radius:var(--r);
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  border:2px solid var(--gold);transition:all .2s;
+}
+.btn-gold:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(240,165,0,.3)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:transparent;color:#fff;font-family:var(--font-h);
+  padding:.88rem 2rem;border-radius:var(--r);
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  border:2px solid rgba(255,255,255,.25);transition:all .2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45);transform:translateY(-2px)}
+/* hero right card */
+.hero-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:2rem;
+  backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.hero-card-lbl{
+  font-family:var(--font-h);font-size:.65rem;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem;
+}
+.hcs{padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.hcs:last-of-type{border:none}
+.hcs .num{font-family:var(--font-h);font-size:2.8rem;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.01em}
+.hcs .lbl{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.2rem}
+.hero-card-tag{
+  margin-top:1.5rem;background:rgba(240,165,0,.12);border:1px solid var(--gold-border);
+  border-radius:20px;padding:.5rem 1rem;
+  font-family:var(--font-h);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.5rem;
+}
+/* stat bar */
+.hero-stats{
+  position:relative;z-index:2;margin-top:4.5rem;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.hstat{padding:1.4rem 3%;border-right:1px solid rgba(255,255,255,.08)}
+.hstat:last-child{border-right:none}
+.hstat strong{display:block;font-family:var(--font-h);font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1}
+.hstat span{font-size:.68rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem;display:block}
+
+/* ─── MARQUEE ─── */
+.mq{background:var(--gold);overflow:hidden;padding:.7rem 0}
+.mq-inner{display:flex;width:max-content;animation:mqs 24s linear infinite}
+@keyframes mqs{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{
+  display:flex;align-items:center;gap:2rem;padding:0 2.5rem;
+  font-family:var(--font-h);font-size:.82rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#fff;font-weight:700;white-space:nowrap;
+}
+.mq-item::after{content:'★';font-size:.5rem;margin-left:2.5rem;opacity:.6}
+
+/* ─── SECTION BASE ─── */
+section{padding:7rem 5%}
+.sl{
+  font-family:var(--font-h);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem;font-weight:700;
+}
+.sl::before{content:'';width:28px;height:2px;background:var(--gold);border-radius:1px}
+.st{font-family:var(--font-h);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:.95;letter-spacing:-.01em;margin-bottom:1rem;color:var(--navy-deep)}
+.ss{color:var(--muted);max-width:500px;font-size:.98rem;line-height:1.75}
+
+/* ─── ABOUT ─── */
+#about{background:var(--off-white)}
+.about-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;align-items:center}
+.about-intro p{color:var(--muted);margin-top:1.2rem;line-height:1.8;max-width:380px;font-size:.98rem}
+.about-nums{display:flex;gap:3rem;margin-top:2.5rem;padding-top:2rem;border-top:2px solid var(--border)}
+.anum .n{font-family:var(--font-h);font-size:3.2rem;font-weight:900;color:var(--navy);line-height:1}
+.anum .l{font-size:.7rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem;font-family:var(--font-h);font-weight:600}
+.about-cards{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.acard{
+  display:flex;gap:1.4rem;align-items:flex-start;
+  padding:1.5rem 1.8rem;background:var(--white);
+  border-bottom:1px solid var(--border);transition:background .2s,transform .2s;
+  cursor:default;
+}
+.acard:last-child{border-bottom:none}
+.acard:hover{background:#fffdf8;transform:translateX(4px)}
+.acard:hover .acard-icon{background:var(--gold);border-color:var(--gold);color:#fff}
+.acard-icon{
+  width:46px;height:46px;min-width:46px;border-radius:var(--r);
+  background:var(--gold-dim);border:1.5px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:1rem;transition:all .25s;
+  flex-shrink:0;
+}
+.acard-body h4{font-family:var(--font-h);font-size:.9rem;font-weight:700;color:var(--navy-deep);margin-bottom:.3rem;letter-spacing:.01em}
+.acard-body p{font-size:.84rem;color:var(--muted);line-height:1.65}
+
+/* ─── PRODUCTS ─── */
+#products{background:var(--white)}
+.prod-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1.5rem}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.pcard{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(26,42,74,.12);border-color:var(--gold)}
+.pcard-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--light)}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.pcard:hover .pcard-img img{transform:scale(1.06)}
+.pcard-tag{
+  position:absolute;top:1rem;left:1rem;z-index:2;
+  background:var(--navy);color:#fff;font-family:var(--font-h);
+  font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  padding:.3rem .75rem;border-radius:20px;
+}
+.pcard-tag.custom{background:var(--gold);color:#fff}
+.pcard-num{
+  position:absolute;bottom:.8rem;right:1rem;z-index:2;
+  font-family:var(--font-h);font-size:5rem;font-weight:900;
+  color:rgba(255,255,255,.06);letter-spacing:.02em;line-height:1;
+}
+.pcard-body{padding:1.6rem 1.8rem}
+.pcard-body h3{font-family:var(--font-h);font-size:1rem;font-weight:700;color:var(--navy-deep);margin-bottom:.3rem}
+.pcard-body p{font-size:.83rem;color:var(--muted);margin-bottom:1.2rem}
+.pcard-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.2rem;border-top:1px solid var(--border)}
+.pcard-price{
+  font-family:var(--font-h);font-size:1.55rem;font-weight:900;
+  color:var(--navy);line-height:1;
+}
+.pcard-price small{font-family:var(--font-b);font-size:.63rem;color:var(--muted-light);display:block;font-weight:400;margin-top:.1rem}
+.pcard-wa{
+  display:flex;align-items:center;gap:.45rem;
+  background:rgba(37,211,102,.09);border:1.5px solid rgba(37,211,102,.25);
+  color:var(--wa);padding:.55rem 1rem;border-radius:var(--r);
+  font-family:var(--font-h);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  transition:all .2s;
+}
+.pcard-wa:hover{background:rgba(37,211,102,.18);border-color:rgba(37,211,102,.5);transform:translateY(-1px)}
+
+/* ─── CTA BANNER ─── */
+.cta-strip{
+  background:linear-gradient(135deg,var(--navy-deep),var(--navy-mid));
+  padding:4.5rem 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.cta-strip::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.cta-strip-glow{
+  position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(240,165,0,.1) 0%,transparent 70%);
+  right:-80px;top:50%;transform:translateY(-50%);
+}
+.cta-strip h2{
+  position:relative;z-index:1;
+  font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.01em;
+}
+.cta-strip h2 em{font-style:normal;color:var(--gold)}
+.cta-strip p{position:relative;z-index:1;color:rgba(255,255,255,.6);margin-top:.5rem;font-size:.95rem}
+.btn-w{
+  position:relative;z-index:1;
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:#fff;color:var(--navy-deep);font-family:var(--font-h);
+  padding:.9rem 2.2rem;border-radius:var(--r);
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;
+  white-space:nowrap;transition:all .2s;border:2px solid #fff;
+}
+.btn-w:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 28px rgba(240,165,0,.3)}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--off-white)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.35fr;gap:5rem;align-items:start}
+.cinfo-list{display:flex;flex-direction:column;gap:0;margin:2rem 0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.citem{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.3rem 1.5rem;background:var(--white);
+  border-bottom:1px solid var(--border);transition:background .2s;
+}
+.citem:last-child{border-bottom:none}
+.citem:hover{background:#fffdf8}
+.citem-icon{
+  width:40px;height:40px;min-width:40px;border-radius:var(--r);
+  background:var(--gold-dim);border:1.5px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:.9rem;flex-shrink:0;
+}
+.citem-body h5{font-family:var(--font-h);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted-light);margin-bottom:.3rem;font-weight:700}
+.citem-body a,.citem-body p{font-size:.88rem;color:var(--text-mid);line-height:1.7;transition:color .2s}
+.citem-body a:hover{color:var(--gold)}
+.socials{display:flex;gap:.7rem;margin-top:1.5rem}
+.sbtn{
+  width:42px;height:42px;border-radius:var(--r);
+  border:1.5px solid var(--border-dark);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:1rem;transition:all .2s;background:var(--white);
+}
+.sbtn.wa:hover{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.4);color:var(--wa)}
+.sbtn.fb:hover{background:rgba(24,119,242,.1);border-color:rgba(24,119,242,.4);color:#1877f2}
+.sbtn.ig:hover{background:rgba(225,48,108,.1);border-color:rgba(225,48,108,.4);color:#e1306c}
+.map-box{
+  border-radius:10px;overflow:hidden;border:1px solid var(--border);
+  height:440px;box-shadow:0 8px 32px rgba(26,42,74,.08);
+  position:relative;
+}
+.map-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:1;
+}
+.map-box iframe{width:100%;height:100%;border:none}
+
+/* ─── FOOTER ─── */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:4rem 5% 2rem}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+.foot-logo{font-family:var(--font-h);font-size:1.8rem;font-weight:900;letter-spacing:.06em;color:#fff}
+.foot-logo em{font-style:normal;color:var(--gold)}
+.foot-brand p{font-size:.85rem;color:rgba(255,255,255,.5);margin-top:.8rem;max-width:260px;line-height:1.75}
+.foot-col h5{font-family:var(--font-h);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:700}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.foot-col ul a{font-size:.85rem;color:rgba(255,255,255,.5);transition:color .2s}
+.foot-col ul a:hover{color:var(--gold)}
+.foot-col p{font-size:.84rem;color:rgba(255,255,255,.5);line-height:1.9;display:flex;align-items:center;gap:.6rem}
+.foot-col p i{color:var(--gold);width:14px}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.3)}
+
+/* ─── WA FLOAT ─── */
+.wa-float{
+  position:fixed;bottom:2.2rem;right:2.2rem;z-index:150;
+  width:56px;height:56px;background:var(--wa);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.5rem;
+  box-shadow:0 4px 22px rgba(37,211,102,.42);
+  animation:bob 3s ease-in-out infinite;transition:transform .2s,box-shadow .2s;
+}
+.wa-float:hover{animation:none;transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,.55)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.wa-float-tip{
+  position:absolute;right:68px;background:var(--navy-deep);color:#fff;
+  font-family:var(--font-h);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  white-space:nowrap;padding:.4rem .9rem;border-radius:var(--r);
+  border:1px solid rgba(255,255,255,.1);opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.wa-float:hover .wa-float-tip{opacity:1}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rv.vis{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-22px);transition:opacity .7s,transform .7s}
+.rv-l.vis{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(22px);transition:opacity .7s,transform .7s}
+.rv-r.vis{opacity:1;transform:none}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card-wrap{display:none}
+  .about-wrap,.contact-wrap{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .cta-strip{flex-direction:column;text-align:center}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .prod-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero h1{font-size:3rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#home">
+    <img src="images/transtinta.png" alt="LJ Fittings" onerror="this.style.display='none'">
+    <span class="nav-logo-text"> <em></em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Início</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#products">Produtos</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/258844128229?text=Olá, gostaria de saber mais sobre os reboques">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+  <div class="hamburger" id="ham">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mob">
+  <a href="#home">Início</a>
+  <a href="#about">Sobre</a>
+  <a href="#products">Produtos</a>
+  <a href="#contact">Contacto</a>
+  <a href="https://wa.me/258844128229" style="color:var(--gold)"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Fabricado em Moçambique</div>
+      <h1>LJ<span>FITTINGS</span></h1>
+      <p class="hero-sub">Fabricação e venda de reboques e semi-reboques de alta qualidade — sem precisar sair do país, sem custo de importação.</p>
+      <div class="hero-btns">
+        <a class="btn-gold" href="#products"><i class="fas fa-layer-group"></i> Ver Produtos</a>
+        <a class="btn-outline" href="#contact"><i class="fas fa-map-marker-alt"></i> Localização</a>
+      </div>
+    </div>
+    <div class="hero-card-wrap rv-r">
+      <div class="hero-card">
+        <div class="hero-card-lbl">Resumo da Empresa</div>
+        <div class="hcs">
+          <div class="num">100%</div>
+          <div class="lbl">Fabricação Nacional</div>
+        </div>
+        <div class="hcs">
+          <div class="num">4+</div>
+          <div class="lbl">Modelos Disponíveis</div>
+        </div>
+        <div class="hcs">
+          <div class="num">MPT</div>
+          <div class="lbl">Maracuene · Maputo</div>
+        </div>
+        <div class="hero-card-tag"><i class="fas fa-circle" style="font-size:.4rem"></i> Entregas em Moçambique</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><strong>100%</strong><span>Nacional</span></div>
+    <div class="hstat"><strong>4+</strong><span>Modelos</span></div>
+    <div class="hstat"><strong>3</strong><span>Contactos</span></div>
+    <div class="hstat"><strong>MOZ</strong><span>Distribuição</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-inner">
+    <span class="mq-item">Reboques para Logística</span>
+    <span class="mq-item">Semi-Reboques de Alta Resistência</span>
+    <span class="mq-item">Fabricação 100% Nacional</span>
+    <span class="mq-item">Economize Tempo e Dinheiro</span>
+    <span class="mq-item">LJ Fittings · Maracuene · Maputo</span>
+    <span class="mq-item">Soluções Customizadas</span>
+    <span class="mq-item">Reboques para Logística</span>
+    <span class="mq-item">Semi-Reboques de Alta Resistência</span>
+    <span class="mq-item">Fabricação 100% Nacional</span>
+    <span class="mq-item">Economize Tempo e Dinheiro</span>
+    <span class="mq-item">LJ Fittings · Maracuene · Maputo</span>
+    <span class="mq-item">Soluções Customizadas</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-intro rv-l">
+      <div class="sl">Sobre Nós</div>
+      <h2 class="st">PORQUÊ ESCOLHER<br>A LJ FITTINGS?</h2>
+      <p>Somos especializados em fabricar reboques e semi-reboques de alta performance para o mercado moçambicano. Qualidade real, perto de si, sem custos de importação.</p>
+      <div class="about-nums">
+        <div class="anum"><div class="n">100%</div><div class="l">Nacional</div></div>
+        <div class="anum"><div class="n">4+</div><div class="l">Modelos</div></div>
+        <div class="anum"><div class="n">MOZ</div><div class="l">Entregas</div></div>
+      </div>
+    </div>
+    <div class="about-cards rv-r" style="transition-delay:.15s">
+      <div class="acard">
+        <div class="acard-icon"><i class="fas fa-award"></i></div>
+        <div class="acard-body">
+          <h4>Alta Qualidade Garantida</h4>
+          <p>Materiais de primeira, soldagem precisa e testes rigorosos em cada unidade fabricada.</p>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="acard-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="acard-body">
+          <h4>Produto 100% Nacional</h4>
+          <p>Sem necessidade de importar. Excelência fabricada aqui mesmo em Moçambique.</p>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="acard-icon"><i class="fas fa-tools"></i></div>
+        <div class="acard-body">
+          <h4>Controlo Total do Processo</h4>
+          <p>Do design à entrega, cada etapa é supervisionada pela nossa equipa especializada.</p>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="acard-icon"><i class="fas fa-sliders-h"></i></div>
+        <div class="acard-body">
+          <h4>Soluções Customizadas</h4>
+          <p>Cada cliente tem necessidades únicas. Desenvolvemos reboques adaptados ao seu negócio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="prod-header rv">
+    <div>
+      <div class="sl">Catálogo</div>
+      <h2 class="st">NOSSOS PRODUTOS</h2>
+    </div>
+    <a class="btn-outline" style="color:var(--navy);border-color:var(--border-dark)" href="https://wa.me/258844128229?text=Olá, gostaria de mais informações">
+      <i class="fas fa-comments"></i> Falar com Especialista
+    </a>
+  </div>
+  <div class="prod-grid rv" style="transition-delay:.1s">
+    <div class="pcard">
+      <div class="pcard-img">
+        <img src="images/trailler 1.png" alt="Reboque Logístico" onerror="this.parentElement.style.background='#e8e6e1'">
+        <span class="pcard-tag">Disponível</span>
+        <span class="pcard-num">01</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Reboque Para Logística</h3>
+        <p>Seguro e eficaz para o dia-a-dia operacional da sua empresa</p>
+        <div class="pcard-footer">
+          <div class="pcard-price">1.700.000 MT<small>por unidade</small></div>
+          <a class="pcard-wa" href="https://wa.me/258844128229?text=Interessado no Reboque para Logística"><i class="fab fa-whatsapp"></i> Contactar</a>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-img">
+        <img src="images/trailler 2.jpg" alt="Reboque Logístico" onerror="this.parentElement.style.background='#e8e6e1'">
+        <span class="pcard-tag">Disponível</span>
+        <span class="pcard-num">02</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Reboque Para Logística</h3>
+        <p>Ideal para transporte de cargas pesadas com total segurança</p>
+        <div class="pcard-footer">
+          <div class="pcard-price">1.700.000 MT<small>por unidade</small></div>
+          <a class="pcard-wa" href="https://wa.me/258844128229?text=Interessado no Reboque para Logística"><i class="fab fa-whatsapp"></i> Contactar</a>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-img">
+        <img src="images/treiler 3.jpg" alt="Reboque Logístico" onerror="this.parentElement.style.background='#e8e6e1'">
+        <span class="pcard-tag">Disponível</span>
+        <span class="pcard-num">03</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Reboque Para Logística</h3>
+        <p>O CHIR48A da LJ Trailers oferece força, segurança e estabilidade para transporte pesado de até 48.000kg.</p>
+        <div class="pcard-footer">
+          <div class="pcard-price">1.700.000 MT<small>por unidade</small></div>
+          <a class="pcard-wa" href="https://wa.me/258844128229?text=Interessado no Reboque para Logística"><i class="fab fa-whatsapp"></i> Contactar</a>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-img">
+        <img src="images/trailler 4.png" alt="Solução Customizada" onerror="this.parentElement.style.background='#e8e6e1'">
+        <span class="pcard-tag custom">Personalizado</span>
+        <span class="pcard-num">04</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Solução Customizada</h3>
+        <p>O atrelado CHIR48PC da LJ Trailers combina resistência, capacidade e engenharia de alto nível.
+        <div class="pcard-footer">
+          <div class="pcard-price" style="font-size:.85rem;line-height:1.4">A partir de<br><span style="font-family:var(--font-h);font-size:1.5rem;font-weight:900">1.700.000 MT</span><small>por unidade</small></div>
+          <a class="pcard-wa" href="https://wa.me/258844128229?text=Gostaria de uma solução personalizada"><i class="fab fa-whatsapp"></i> Orçamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-strip rv">
+  <div class="cta-strip-glow"></div>
+  <div>
+    <h2>PRONTO PARA FAZER<br>O SEU <em>PEDIDO?</em></h2>
+    <p>Resposta rápida, sem complicações. Fale connosco agora.</p>
+  </div>
+  <a class="btn-w" href="https://wa.me/258844128229?text=Olá, quero fazer um pedido">
+    <i class="fab fa-whatsapp"></i> Contactar no WhatsApp
+  </a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="sl rv">Contacto</div>
+      <h2 class="st rv">ENTRE EM<br>CONTACTO</h2>
+      <p class="ss rv" style="margin-top:1rem">Estamos prontos para responder às suas questões e encontrar a melhor solução para o seu negócio.</p>
+      <div class="cinfo-list">
+        <div class="citem rv">
+          <div class="citem-icon"><i class="fas fa-phone"></i></div>
+          <div class="citem-body">
+            <h5>Telefones</h5>
+            <a href="tel:+258877032000">+258 87 70 32 000</a><br>
+            <a href="tel:+258844128229">+258 84 41 28 229</a><br>
+            <a href="tel:+258875675550">+258 87 56 75 550</a>
+          </div>
+        </div>
+        <div class="citem rv" style="transition-delay:.1s">
+          <div class="citem-icon"><i class="fas fa-envelope"></i></div>
+          <div class="citem-body">
+            <h5>Email</h5>
+            <a href="mailto:ljfittings@gmail.com">ljfittings@gmail.com</a>
+          </div>
+        </div>
+        <div class="citem rv" style="transition-delay:.2s">
+          <div class="citem-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="citem-body">
+            <h5>Localização</h5>
+            <p>Maracuene, Maputo, Moçambique</p>
+          </div>
+        </div>
+      </div>
+      <div class="socials rv">
+        <a class="sbtn wa" href="https://wa.me/258844128229"><i class="fab fa-whatsapp"></i></a>
+        <a class="sbtn fb" href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="sbtn ig" href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="map-box rv">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.0947925311493!2d32.66632987506169!3d-25.668152242356655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ee6eb3f43e4986f%3A0x9a846934601d57af!2sLJ%20FITTINGS%20S.U%20LDA!5e0!3m2!1spt-PT!2smz!4v1755709988430!5m2!1spt-PT!2smz"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo">LJ <em>FITTINGS</em></div>
+      <p>A Força e Qualidade Que o Seu Caminhão Precisa. Fabricação nacional, padrão internacional.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Navegação</h5>
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#about">Sobre Nós</a></li>
+        <li><a href="#products">Produtos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Contacto Rápido</h5>
+      <p><i class="fas fa-phone"></i>+258 844 128 229</p>
+      <p><i class="fas fa-envelope"></i>ljfittings@gmail.com</p>
+      <p><i class="fas fa-map-marker-alt"></i>Maracuene, Maputo</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2025 LJ Fittings S.U. LDA. Todos os direitos reservados.</p>
+    <p>Maracuene · Maputo · Moçambique</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/258844128229?text=Olá, gostaria de saber mais sobre os reboques">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-float-tip">Falar no WhatsApp</span>
+</a>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+// Hamburger
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')}));
+
+// Scroll reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>io.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+</script>
+</body>
+</html>
